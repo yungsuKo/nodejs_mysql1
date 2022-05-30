@@ -25,22 +25,8 @@ var app = http.createServer(function(request,response){
       topic.update(request,response);
     } else if(pathname === '/update_process'){
       topic.update_process(request,response);
-
     } else if(pathname === '/delete_process'){
-      var body = '';
-      request.on('data', function(data){
-          body = body + data;
-      });
-      request.on('end', function(){
-          var post = qs.parse(body);
-          db.query('DELETE FROM topic WHERE id = ?', [post.id], function(error, result){
-            if(error){
-              throw error;
-            }
-            response.writeHead(302, {Location: `/`});
-            response.end();
-          });
-      });
+
     } else {
       response.writeHead(404);
       response.end('Not found');
